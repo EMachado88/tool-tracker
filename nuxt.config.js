@@ -45,9 +45,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    ['nuxt-vuex-localstorage', {
-      localStorage: ['tools']
-    }]
+    'nuxt-vuex-localstorage'
   ],
   /*
   ** Axios module configuration

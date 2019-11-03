@@ -50,8 +50,8 @@ export default {
       drawer: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Home',
+          icon: 'mdi-tools',
+          title: 'Tools',
           to: '/'
         }
       ],
