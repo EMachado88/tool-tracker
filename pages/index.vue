@@ -32,15 +32,53 @@
           </v-card-text>
 
           <v-card-actions>
+            <v-btn :to="'/new/' + index" text>
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
             <v-btn text @click.stop="removeTool(tool, index)">
-              <v-icon color="error">mdi-delete-circle</v-icon>
+              <v-icon>mdi-delete</v-icon>
             </v-btn>
             <v-spacer />
-            <v-btn :to="'/new/' + index" text>Edit</v-btn>
+            <v-btn @click.stop="openEstimate(tool, index)" text>
+              Estimated failure
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-container>
+
+    <v-dialog
+      v-model="failure.dialog"
+      max-width="600px"
+    >
+      <v-card>
+        <v-card-title>
+          <span class="headline">Estimated Failure</span>
+          <v-spacer></v-spacer>
+          <span class="subtitle">{{ tool.name }}</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="6">
+                <v-text-field type="number" value="1" min="1" required></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-select
+                  v-model="failure.selected"
+                  :items="failure.items"
+                ></v-select>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn class="mr-5" large text @click.stop="failure.dialog = false" dark>Close</v-btn>
+          <v-btn large color="primary" @click.stop="saveEstimate" dark>Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <v-btn
       fixed
@@ -60,6 +98,16 @@
 
 <script>
 export default {
+  data () {
+    return {
+      tool: {},
+      failure: {
+        dialog: false,
+        items: ['Day(s)', 'Week(s)', 'Month(s)', 'Year(s)'],
+        selected: 'Month(s)'
+      }
+    }
+  },
   computed: {
     tools () {
       return this.$store.state.localStorage.tools
@@ -72,6 +120,13 @@ export default {
       if (confirm(message)) {
         this.$store.commit('localStorage/removeTool', index)
       }
+    },
+    openEstimate (tool, index) {
+      this.tool = tool
+      this.failure.dialog = true
+    },
+    saveEstimate (index) {
+
     }
   },
   head () {
