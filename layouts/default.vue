@@ -24,12 +24,13 @@
     </v-navigation-drawer>
     <v-app-bar
       fixed
+      color="primary"
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <span>Cynthia</span>
+      <span>Welcome, Cynthia</span>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -37,7 +38,7 @@
       </v-container>
     </v-content>
     <v-footer app>
-      <span>&copy; emachado 2019</span>
+      <span>&copy; EMachado 2019 | All rights reserved.</span>
     </v-footer>
   </v-app>
 </template>
@@ -59,3 +60,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+footer {
+  font-size: 12px;
+}
+</style>

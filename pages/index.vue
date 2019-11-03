@@ -8,7 +8,7 @@
       v-for="(tool, index) in tools"
       :key="index"
     >
-      {{ tool }}
+      {{ tool.name }}
     </v-col>
 
     <v-btn
@@ -31,7 +31,7 @@
 export default {
   computed: {
     tools () {
-      return this.$store.state.localStorage.tools
+      return this.$store.state.tools
     }
   },
   head () {
